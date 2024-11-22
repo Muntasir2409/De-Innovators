@@ -12,12 +12,12 @@
     <header class="bg-green-800 text-white">
         <nav class="bg-green-700 text-white shadow-md">
             <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-                <a href="#" class="text-2xl font-bold">FootballBets</a>
+                <a href="/" class="text-2xl font-bold">FootballBets</a>
                 <ul class="flex space-x-6">
-                    <li><a href="#" class="hover:text-yellow-400">Home</a></li>
-                    <li><a href="#matches" class="hover:text-yellow-400">Wedstrijden</a></li>
-                    <li><a href="#how-to" class="hover:text-yellow-400">Hoe werkt het?</a></li>
-                    <li><a href="#contact" class="hover:text-yellow-400">Contact</a></li>
+                    <li><a href="/#matches" class="hover:text-yellow-400">Wedstrijden</a></li>
+                    <li><a href="/#how-to" class="hover:text-yellow-400">Hoe werkt het?</a></li>
+                    <li><a href="/#contact" class="hover:text-yellow-400">Contact</a></li>
+                    <li><a href="/teams/index" class="hover:text-yellow-400">teams</a></li>
                 </ul>
             </div>
         </nav>
