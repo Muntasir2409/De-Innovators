@@ -14,10 +14,57 @@
             <div class="container mx-auto px-4 py-4 flex justify-between items-center">
                 <a href="/" class="text-2xl font-bold">FootballBets</a>
                 <ul class="flex space-x-6">
-                    <li><a href="/#matches" class="hover:text-yellow-400">Wedstrijden</a></li>
-                    <li><a href="/#how-to" class="hover:text-yellow-400">Hoe werkt het?</a></li>
-                    <li><a href="/#contact" class="hover:text-yellow-400">Contact</a></li>
-                    <li><a href="/teams/index" class="hover:text-yellow-400">teams</a></li>
+                    <li>
+                        <a href="/#matches"
+                           class="block transform transition-transform duration-300 ease-in-out hover:scale-110 hover:bg-white hover:text-yellow-400 hover:font-bold px-4 py-2 rounded-lg">
+                           Wedstrijden
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/#how-to"
+                           class="block transform transition-transform duration-300 ease-in-out hover:scale-110 hover:bg-white hover:text-yellow-400 hover:font-bold px-4 py-2 rounded-lg">
+                           Hoe werkt het?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/#contact"
+                           class="block transform transition-transform duration-300 ease-in-out hover:scale-110 hover:bg-white hover:text-yellow-400 hover:font-bold px-4 py-2 rounded-lg">
+                           Contact
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/teams/index"
+                           class="block transform transition-transform duration-300 ease-in-out hover:scale-110 hover:bg-white hover:text-yellow-400 hover:font-bold px-4 py-2 rounded-lg">
+                           Teams
+                        </a>
+                    </li>
+                </ul>
+                <ul class="flex space-x-6">
+                    @guest
+                        <li>
+                            <a href="{{ route('login') }}"
+                               class="transform hover:scale-110 hover:text-yellow-400 transition duration-300 ease-in-out">
+                               Login
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('register') }}"
+                               class="transform hover:scale-110 hover:text-yellow-400 transition duration-300 ease-in-out">
+                               Registreren
+                            </a>
+                        </li>
+                    @endguest
+                    @auth
+                        <li>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit"
+                                        class="transform hover:scale-110 hover:text-yellow-400 transition duration-300 ease-in-out">
+                                    Uitloggen
+                                </button>
+                            </form>
+                        </li>
+                    @endauth
                 </ul>
             </div>
         </nav>
@@ -25,8 +72,9 @@
         <div class="container mx-auto px-4 py-16 text-center">
             <h1 class="text-5xl font-bold">Welkom bij FootballBets</h1>
             <p class="mt-4 text-lg">De plek waar je fictief kunt wedden op je favoriete voetbalwedstrijden.</p>
-            <a href="#matches" class="mt-6 inline-block bg-yellow-400 text-green-900 px-6 py-3 rounded-lg font-semibold hover:bg-yellow-500">
-                Bekijk Wedstrijden
+            <a href="#matches"
+               class="mt-6 inline-block bg-yellow-400 text-green-900 px-6 py-3 rounded-lg font-semibold transform hover:scale-105 hover:bg-yellow-500 transition duration-300 ease-in-out">
+               Bekijk Wedstrijden
             </a>
         </div>
     </header>

@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-// use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use App\Models\Team;
+use App\Policies\TeamPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        //
+        // Map the Team model to its policy
+        Team::class => TeamPolicy::class,
     ];
 
     /**
@@ -21,6 +23,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->registerPolicies();
+
+        // Additional Gate definitions can go here if needed
     }
 }

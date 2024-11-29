@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->foreignId('user_id') // Foreign key to the users table
+                  ->constrained()        // Automatically references the `id` on the `users` table
+                  ->onDelete('cascade'); // Deletes the team if the user is deleted
             $table->timestamps();
         });
     }
@@ -21,7 +24,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('teams');
     }
