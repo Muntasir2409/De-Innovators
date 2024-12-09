@@ -16,6 +16,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\PlayerController;
 
+use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\GameController;
+
+Route::get('/games', [GameController::class, 'index'])->name('games.index');
+Route::get('/generate-games', [GameController::class, 'generateGames'])->name('games.generate');
+
+
+
 
 Route::get('teams/index', [TeamController::class, 'index'])->name('teams.index');    // Lijst van teams
 Route::get('teams/create', [TeamController::class, 'create'])->name('teams.create');    // Formulier voor het aanmaken van een team

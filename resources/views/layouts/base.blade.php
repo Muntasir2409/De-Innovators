@@ -15,7 +15,7 @@
                 <a href="/" class="text-2xl font-bold">FootballBets</a>
                 <ul class="flex space-x-6">
                     <li>
-                        <a href="/#matches"
+                        <a href="/games"
                            class="block transform transition-transform duration-300 ease-in-out hover:scale-110 hover:bg-white hover:text-yellow-400 hover:font-bold px-4 py-2 rounded-lg">
                            Wedstrijden
                         </a>

@@ -3,13 +3,15 @@
     <section id="matches" class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-8">Aanstaande Wedstrijden</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Voeg hier wedstrijdkaarten toe -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+                <!-- Wedstrijd knoppen -->
             </div>
 
             <!-- Geen wedstrijden gepland -->
             <div class="mt-8 text-center">
-                <p class="text-lg text-gray-600 italic">Nog geen wedstrijden gepland.</p>
+                <a href="{{ route('games.index') }}" class="inline-block bg-green-500 text-white py-3 px-6 rounded-lg mt-4 text-lg font-semibold transition duration-300 hover:bg-green-600 shadow-lg transform hover:scale-105">
+                    Bekijk Wedstrijden
+                </a>
             </div>
         </div>
     </section>
@@ -33,4 +35,5 @@
             </div>
         </div>
     </section>
+
 </x-base-layout>
