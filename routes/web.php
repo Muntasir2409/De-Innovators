@@ -15,8 +15,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-use App\Http\Controllers\TeamController;
-use App\Http\Controllers\PlayerController;
+
 
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\GameController;

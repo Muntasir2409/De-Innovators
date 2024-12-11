@@ -19,28 +19,44 @@ class GameController extends Controller
     // Genereer de wedstrijden
     public function generateGames()
     {
-        // Haal alle teams op
         $teams = Team::all();
 
-        // Maak een lege array voor de wedstrijden
-        $games = [];
-
-        // Genereer wedstrijden door teams willekeurig te koppelen
-        for ($i = 0; $i < count($teams) / 2; $i++) {
-            $team1 = $teams->random();
-            $team2 = $teams->where('id', '!=', $team1->id)->random();
-
-            // Maak een nieuwe wedstrijd aan
-            $game = Game::create([
-                'team1_id' => $team1->id,
-                'team2_id' => $team2->id,
-                'date' => now()->addDays(rand(1, 30)), // Willekeurige datum tussen nu en 30 dagen
-            ]);
-
-            $games[] = $game; // Voeg de wedstrijd toe aan de lijst
+        // Controleer of er voldoende teams zijn om wedstrijden te maken
+        if ($teams->count() < 2) {
+            return redirect()->route('games.index')->with('error', 'Niet genoeg teams om wedstrijden te genereren.');
         }
 
-        // Redirect naar de games.index met een succesbericht
-        return redirect()->route('games.index')->with('success', 'Wedstrijden zijn succesvol gegenereerd!');
+        // Willekeurige volgorde van teams om wedstrijden te mixen
+        $shuffledTeams = $teams->shuffle();
+        $games = [];
+
+        // Koppel teams in paren
+        for ($i = 0; $i < $shuffledTeams->count() - 1; $i += 2) {
+            $team1 = $shuffledTeams[$i];
+            $team2 = $shuffledTeams[$i + 1];
+
+            $games[] = [
+                'team1_id' => $team1->id,
+                'team2_id' => $team2->id,
+                'date' => now()->addDays(rand(1, 7)), // Datum binnen de komende week
+            ];
+        }
+
+        // Als er een oneven aantal teams is, krijgt het laatste team een 'bye'
+        if ($shuffledTeams->count() % 2 !== 0) {
+            $lastTeam = $shuffledTeams->last();
+            $games[] = [
+                'team1_id' => $lastTeam->id,
+                'team2_id' => null, // Vrije ronde
+                'date' => now()->addDays(rand(1, 7)),
+            ];
+        }
+
+        // Wedstrijden opslaan in de database
+        foreach ($games as $game) {
+            Game::create($game);
+        }
+
+        return redirect()->route('games.index')->with('success', 'Wedstrijden succesvol gegenereerd!');
     }
 }
