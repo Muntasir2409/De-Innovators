@@ -12,7 +12,7 @@
     <header class="bg-green-800 text-white">
         <nav class="bg-green-700 text-white shadow-md">
             <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-                <a href="/" class="text-2xl font-bold">FootballBets</a>
+                <a href="/" class="text-2xl font-bold block transform transition-transform duration-300 ease-in-out hover:scale-110 hover:text-yellow-400 hover:font-bold px-4 py-2 rounded-lg">FootballBets</a>
                 <ul class="flex space-x-6">
                     <li>
                         <a href="/games"
@@ -32,12 +32,22 @@
                            Contact
                         </a>
                     </li>
-                    <li>
-                        <a href="/teams/index"
-                           class="block transform transition-transform duration-300 ease-in-out hover:scale-110 hover:bg-white hover:text-yellow-400 hover:font-bold px-4 py-2 rounded-lg">
-                           Teams
-                        </a>
-                    </li>
+                    @if (auth()->check() && auth()->user()->role === 'scheidsrechter' || 'admin')
+                        <li>
+                            <a href="/teams/index"
+                                class="block transform transition-transform duration-300 ease-in-out hover:scale-110 hover:bg-white hover:text-yellow-400 hover:font-bold px-4 py-2 rounded-lg">
+                                Team
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth()->check() && auth()->user()->role === 'admin')
+                        <li>
+                            <a href="{{ url('/admin') }}"
+                                class="block transform transition-transform duration-300 ease-in-out hover:scale-110 hover:bg-white hover:text-yellow-400 hover:font-bold px-4 py-2 rounded-lg">
+                                Admin Panel
+                            </a>
+                        </li>
+                    @endif
                 </ul>
                 <ul class="flex space-x-6">
                     @guest

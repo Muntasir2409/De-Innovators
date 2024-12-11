@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TeamController;
+use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,22 +42,44 @@ Route::get('/teams/{team}/players/create', [PlayerController::class, 'create'])-
 Route::post('/teams/{team}/players', [PlayerController::class, 'store'])->name('players.store');
 
 
+// General Public Routes
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 
 Route::get('/dashboard', function () {
     return view('home');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware(['auth'])->group(function () {
-    Route::resource('teams', TeamController::class);
+Route::get('/admin', function () {
+    return view('admin.index');
 });
 
-Route::middleware('auth')->group(function () {
+
+
+require __DIR__ . '/auth.php';
+
+// Team Routes
+Route::get('teams/index', [TeamController::class, 'index'])->name('teams.index');
+Route::get('teams/create', [TeamController::class, 'create'])->name('teams.create');
+Route::post('teams', [TeamController::class, 'store'])->name('teams.store');
+Route::get('teams/{team}/edit', [TeamController::class, 'edit'])->name('teams.edit');
+Route::put('teams/{team}', [TeamController::class, 'update'])->name('teams.update');
+Route::get('teams/{team}', [TeamController::class, 'show'])->name('teams.show');
+Route::delete('teams/{team}', [TeamController::class, 'destroy'])->name('teams.destroy');
+
+// Player Routes
+Route::get('/teams/{team}/players/create', [PlayerController::class, 'create'])->name('players.create');
+Route::post('/teams/{team}/players', [PlayerController::class, 'store'])->name('players.store');
+
+//Admin Routes
+Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+Route::get('/admin', [AdminController::class, 'index'])->name('admin.users');
+Route::put('/admin/users/{user}/update-role', [AdminController::class, 'updateRole'])->name('admin.users.updateRole');
+
+// Profile Routes
+Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-require __DIR__.'/auth.php';
