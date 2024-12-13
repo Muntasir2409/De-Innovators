@@ -18,6 +18,7 @@ class Team extends Model
         return $this->hasMany(Player::class);
     }
 
+
     // Relatie met games als team1
     public function gamesAsTeam1()
     {
@@ -29,4 +30,13 @@ class Team extends Model
     {
         return $this->hasMany(Game::class, 'team2_id');
     }
+    public function games()
+{
+    return $this->hasMany(Game::class);
+}
+public function standing()
+{
+    return $this->hasOne(Standing::class);
+}
+
 }

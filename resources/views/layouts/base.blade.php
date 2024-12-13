@@ -21,6 +21,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="/standings"
+                           class="block transform transition-transform duration-300 ease-in-out hover:scale-110 hover:bg-white hover:text-yellow-400 hover:font-bold px-4 py-2 rounded-lg">
+                           Stand
+                        </a>
+                    </li>
+                    <li>
                         <a href="/#how-to"
                            class="block transform transition-transform duration-300 ease-in-out hover:scale-110 hover:bg-white hover:text-yellow-400 hover:font-bold px-4 py-2 rounded-lg">
                            Hoe werkt het?

@@ -23,7 +23,9 @@ use App\Http\Controllers\GameController;
 Route::get('/games', [GameController::class, 'index'])->name('games.index');
 Route::get('/generate-games', [GameController::class, 'generateGames'])->name('games.generate');
 
+Route::post('/games/{id}/update', [GameController::class, 'updateScore'])->name('games.update');
 
+Route::get('/standings', [GameController::class, 'standings'])->name('games.standings');
 
 
 Route::get('teams/index', [TeamController::class, 'index'])->name('teams.index');    // Lijst van teams
