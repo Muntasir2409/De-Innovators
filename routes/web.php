@@ -15,7 +15,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\GameController;
