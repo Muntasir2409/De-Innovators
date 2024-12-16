@@ -5,6 +5,7 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GameController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,13 +16,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
-
-use App\Http\Controllers\ScheduleController;
-use App\Http\Controllers\GameController;
 
 Route::get('/games', [GameController::class, 'index'])->name('games.index');
 Route::get('/generate-games', [GameController::class, 'generateGames'])->name('games.generate');
