@@ -27,30 +27,20 @@ class GameController extends Controller
             return redirect()->route('games.index')->with('error', 'Niet genoeg teams om wedstrijden te genereren.');
         }
 
-        // Willekeurige volgorde van teams om wedstrijden te mixen
-        $shuffledTeams = $teams->shuffle();
         $games = [];
 
-        // Koppel teams in paren
-        for ($i = 0; $i < $shuffledTeams->count() - 1; $i += 2) {
-            $team1 = $shuffledTeams[$i];
-            $team2 = $shuffledTeams[$i + 1];
+        // Genereer unieke wedstrijden (elk team speelt één keer tegen elk ander team)
+        for ($i = 0; $i < $teams->count(); $i++) {
+            for ($j = $i + 1; $j < $teams->count(); $j++) {
+                $team1 = $teams[$i];
+                $team2 = $teams[$j];
 
-            $games[] = [
-                'team1_id' => $team1->id,
-                'team2_id' => $team2->id,
-                'date' => now()->addDays(rand(1, 7)), // Datum binnen de komende week
-            ];
-        }
-
-        // Als er een oneven aantal teams is, krijgt het laatste team een 'bye'
-        if ($shuffledTeams->count() % 2 !== 0) {
-            $lastTeam = $shuffledTeams->last();
-            $games[] = [
-                'team1_id' => $lastTeam->id,
-                'team2_id' => null, // Vrije ronde
-                'date' => now()->addDays(rand(1, 7)),
-            ];
+                $games[] = [
+                    'team1_id' => $team1->id,
+                    'team2_id' => $team2->id,
+                    'date' => now()->addDays(count($games)), // Elk spel op een andere dag
+                ];
+            }
         }
 
         // Wedstrijden opslaan in de database
@@ -60,6 +50,8 @@ class GameController extends Controller
 
         return redirect()->route('games.index')->with('success', 'Wedstrijden succesvol gegenereerd!');
     }
+
+
     public function updateScore(Request $request, $id)
     {
         // Valideer de input
