@@ -3,11 +3,16 @@
         <h1 class="text-xl font-bold">Wedstrijden</h1>
 
         <!-- Knop om wedstrijden te genereren -->
-        <form action="{{ route('games.generate') }}" method="GET">
-            <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded mt-4">
-                Genereer Wedstrijden
-            </button>
-        </form>
+        @guest
+
+        @endguest
+        @auth
+            <form action="{{ route('games.generate') }}" method="GET">
+                <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded mt-4">
+                    Genereer Wedstrijden
+                </button>
+            </form>
+        @endauth
 
         @if(session('success'))
             <div class="bg-green-500 text-white p-4 mt-4 rounded">
@@ -41,12 +46,19 @@
 
         <td class="border px-4 py-2">
             @if(is_null($game->score_team1) && is_null($game->score_team2))
+            @guest
+                <p>socers nog niet bekent</p>
+            @endguest
+            @auth
                 <form action="{{ route('games.update', $game->id) }}" method="POST">
                     @csrf
+
                     <input type="number" name="score_team1" required class="border p-1" placeholder="Score Team 1" />
                     <input type="number" name="score_team2" required class="border p-1" placeholder="Score Team 2" />
                     <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded mt-2">Score invoeren</button>
                 </form>
+            @endauth
+
             @else
                 <span>{{ $game->score_team1 }} - {{ $game->score_team2 }}</span>
             @endif
